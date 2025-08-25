@@ -84,7 +84,7 @@ jobs:
       - name: Read current version
         id: get_version
         run: |
-          VERSION=$(cat build/Version.txt)
+          VERSION=$(cat Version.txt)
           echo "Current version: $VERSION"
           echo "version=$VERSION" >> $GITHUB_ENV
 
@@ -103,14 +103,14 @@ jobs:
 
           NEW_VERSION="$MAJOR.$MINOR.$PATCH"
           echo "New version: $NEW_VERSION"
-          echo $NEW_VERSION > build/Version.txt
+          echo $NEW_VERSION > Version.txt
           echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
 
       - name: Commit new version
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add build/Version.txt
+          git add Version.txt
           git commit -m "Bump version to ${{ env.new_version }}" || echo "No changes to commit"
           git push origin HEAD:${GITHUB_REF_NAME}
 
