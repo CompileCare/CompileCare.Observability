@@ -6,7 +6,7 @@
         {
             app.MapGet("information", async (ILogger<TestLogging> logger, CancellationToken cancellationToken) =>
             {
-                logger.LogInformation("This is a test log message from TestLogging endpoint at {Time}", DateTime.UtcNow, cancellationToken);
+                logger.LogInformation("This is a test log message from TestLogging endpoint at {Time}", DateTime.UtcNow);
                 return Results.Ok(new { message = "Test log message sent. Check your logs.", time = DateTime.UtcNow });
             });
 
