@@ -5,6 +5,12 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add Serilog Logging - this is optional as we have extended the HostBuilder to use Serilog
+// builder.AddCompileCareLogging();
+
+// Plug in Observability (Serilog + Elastic)
+builder.Host.UseCompileCareObservability();
+
 // Otel 
 builder.Services.AddObservability(builder.Configuration);
 
@@ -17,6 +23,7 @@ builder.Services.AddObservabilityHealthChecks(deps =>
     //// Example: custom dependency check
     //deps.Add("external-api", new ExternalApiHealthCheck("https://example.com/health"));
 });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
