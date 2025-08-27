@@ -50,10 +50,8 @@ Here’s a conceptual flow of how the components interact:
 
 This setup provides:
 
-Metrics with Prometheus
-
-Traces with Jaeger
-
-Logs with Elasticsearch + Kibana
+- 📊 Metrics with **Prometheus**
+- 🕵️‍♂️ Traces with **Jaeger**
+- 📚 Logs with **Elasticsearch** + 🎨 **Kibana**
 
 Perfect for debugging, performance monitoring, and gaining deep insights into your system.
