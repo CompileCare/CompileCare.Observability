@@ -1,4 +1,5 @@
-﻿using OpenTelemetry.Logs;
+﻿using OpenTelemetry.Exporter;
+using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -31,13 +32,17 @@ namespace Sample.Api.Extensions
                 .WithMetrics(metrics =>
                 {
                     metrics.SetResourceBuilder(resourceBuilder)
-                     .AddAspNetCoreInstrumentation()
-                     .AddHttpClientInstrumentation()
-                     .AddRuntimeInstrumentation()
-                     .AddOtlpExporter(o =>
-                     {
-                         o.Endpoint = new Uri(otlpEndpoint);
-                     }).AddPrometheusExporter(); // ;
+                        .AddAspNetCoreInstrumentation()
+                        .AddHttpClientInstrumentation()
+                        .AddRuntimeInstrumentation()
+                        .AddOtlpExporter(o =>
+                        {
+                            o.Endpoint = new Uri(otlpEndpoint);
+                            o.Protocol = OtlpExportProtocol.HttpProtobuf;
+                        });
+
+                    // Register Prometheus exporter separately
+                    metrics.AddPrometheusExporter();
                 });
 
             // Logs
@@ -47,6 +52,7 @@ namespace Sample.Api.Extensions
                  .AddOtlpExporter(opt =>
                  {
                      opt.Endpoint = new Uri(otlpEndpoint);
+                     opt.Protocol = OtlpExportProtocol.HttpProtobuf;
                  });
             });
         }

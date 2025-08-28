@@ -28,7 +28,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
 var app = builder.Build();
-
+app.MapPrometheusScrapingEndpoint();
 if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 {
     app.UseSwagger();
@@ -38,8 +38,8 @@ if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
         options.RoutePrefix = string.Empty; // makes Swagger UI available at `/`
     });
 }
+
 app.MapGet("/", () => "Hello World!");
 app.MapEndpoints();
 app.MapHealthEndpoints();
-//app.MapPrometheusScrapingEndpoint();
 app.Run();

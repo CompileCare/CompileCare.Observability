@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -26,6 +27,7 @@ namespace CompileCare.Observability.Extensions
                            .AddOtlpExporter(o =>
                            {
                                o.Endpoint = new Uri(otlpEndpoint); // OTLP gRPC
+                               o.Protocol = OtlpExportProtocol.HttpProtobuf;
                            }); // default exporter (OTLP)
                 })
                 .WithMetrics(metrics =>
@@ -37,7 +39,9 @@ namespace CompileCare.Observability.Extensions
                            .AddOtlpExporter(o =>
                            {
                                o.Endpoint = new Uri(otlpEndpoint); // OTLP gRPC
+                               o.Protocol = OtlpExportProtocol.HttpProtobuf;
                            });
+                    metrics.AddPrometheusExporter();
                 });
 
             return services;

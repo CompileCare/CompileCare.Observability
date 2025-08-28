@@ -5,7 +5,14 @@ scrape_configs:
   - job_name: "otel-collector"
     static_configs:
       - targets: ["otel-collector:8889"]
-
+  
+  - job_name: "sample-api-pmt"
+    scheme: https
+    static_configs:
+      - targets: ["host.docker.internal:7125"]
+    tls_config:
+      insecure_skip_verify: true
+  
   - job_name: "prometheus"
     static_configs:
       - targets: ["localhost:9090"]

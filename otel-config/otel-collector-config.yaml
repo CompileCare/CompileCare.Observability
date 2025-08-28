@@ -8,10 +8,8 @@ exporters:
   prometheus:
     endpoint: "0.0.0.0:8889"
 
-  otlp:
-    endpoint: jaeger:4317
-    tls:
-      insecure: true
+  otlphttp: # Send traces to Jaeger
+    endpoint: "http://jaeger:4318/v1/traces"
 
   debug:
     verbosity: detailed
@@ -24,4 +22,4 @@ service:
 
     traces:
       receivers: [otlp]
-      exporters: [otlp, debug]
+      exporters: [otlphttp, debug]
