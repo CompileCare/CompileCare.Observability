@@ -14,7 +14,7 @@
             {
                 try
                 {
-                    throw new InvalidOperationException("Something went wrong!");
+                    throw new InvalidOperationException("Something went wrong! ");
                 }
                 catch (Exception ex)
                 {

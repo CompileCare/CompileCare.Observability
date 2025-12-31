@@ -28,7 +28,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
 var app = builder.Build();
-app.MapPrometheusScrapingEndpoint();
+app.MapPrometheusScrapingEndpoint(); // /metrics
 if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 {
     app.UseSwagger();

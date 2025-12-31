@@ -63,6 +63,61 @@ jobs:
 
       - name: Check code format
         run: dotnet format --verify-no-changes
+  publish:
+    name: Publish NuGet Package
+    runs-on: ubuntu-latest
+    needs: [build, test, code-quality]
+
+    if: github.event_name == 'push'
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Determine version suffix
+        id: version
+        shell: bash
+        run: |
+          BASE_VERSION="1.0.0"
+          BRANCH="${GITHUB_REF_NAME}"
+
+          if [[ "$BRANCH" == "main" ]]; then
+            echo "VERSION=$BASE_VERSION" >> $GITHUB_ENV
+
+          elif [[ "$BRANCH" == "develop" ]]; then
+            echo "VERSION=$BASE_VERSION-dev.${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+
+          elif [[ "$BRANCH" == feature/* ]]; then
+            SAFE_BRANCH=$(echo "$BRANCH" | sed 's|/|-|g')
+            echo "VERSION=$BASE_VERSION-$SAFE_BRANCH.${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+
+          elif [[ "$BRANCH" == bugfix/* ]]; then
+            SAFE_BRANCH=$(echo "$BRANCH" | sed 's|/|-|g')
+            echo "VERSION=$BASE_VERSION-$SAFE_BRANCH.${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+          fi
+
+      - name: Pack NuGet
+        run: |
+          dotnet pack \
+            --configuration Release \
+            -p:Version=${{ env.VERSION }} \
+            -o ./nupkg
+
+      - name: Publish to GitHub Packages
+        run: |
+          dotnet nuget push "./nupkg/*.nupkg" \
+            --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
+            --api-key ${{ secrets.GITHUB_TOKEN }}
+
 
       # Optional SonarQube / SonarCloud
       # - name: SonarQube Scan

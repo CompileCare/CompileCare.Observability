@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Text.Json;
 
-
 namespace CompileCare.Observability.AspNetCore.Extensions
 {
     public static class EndpointExtensions
