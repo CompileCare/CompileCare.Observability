@@ -54,124 +54,49 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
-
       - name: Check code format
         run: dotnet format --verify-no-changes
+
   publish:
     name: Publish NuGet Package
     runs-on: ubuntu-latest
     needs: [build, test, code-quality]
-
     if: github.event_name == 'push'
-
     permissions:
       contents: read
       packages: write
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
-
       - name: Determine version suffix
         id: version
         shell: bash
         run: |
-          BASE_VERSION="1.0.0"
+          BASE_VERSION="1.0.1"
           BRANCH="${GITHUB_REF_NAME}"
 
           if [[ "$BRANCH" == "main" ]]; then
-            echo "VERSION=$BASE_VERSION" >> $GITHUB_ENV
-
+            echo "VERSION=$BASE_VERSION" >> "$GITHUB_ENV"
           elif [[ "$BRANCH" == "develop" ]]; then
-            echo "VERSION=$BASE_VERSION-dev.${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
-
-          elif [[ "$BRANCH" == feature/* ]]; then
+            echo "VERSION=$BASE_VERSION-dev.${GITHUB_RUN_NUMBER}" >> "$GITHUB_ENV"
+          elif [[ "$BRANCH" == feature/* || "$BRANCH" == bugfix/* ]]; then
             SAFE_BRANCH=$(echo "$BRANCH" | sed 's|/|-|g')
-            echo "VERSION=$BASE_VERSION-$SAFE_BRANCH.${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
-
-          elif [[ "$BRANCH" == bugfix/* ]]; then
-            SAFE_BRANCH=$(echo "$BRANCH" | sed 's|/|-|g')
-            echo "VERSION=$BASE_VERSION-$SAFE_BRANCH.${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+            echo "VERSION=$BASE_VERSION-$SAFE_BRANCH.${GITHUB_RUN_NUMBER}" >> "$GITHUB_ENV"
           fi
 
       - name: Pack NuGet
-        run: |
-          dotnet pack \
-            --configuration Release \
-            -p:Version=${{ env.VERSION }} \
-            -o ./nupkg
+        run: dotnet pack --configuration Release -p:Version=${{ env.VERSION }} -o ./nupkg
 
       - name: Publish to GitHub Packages
         run: |
-          dotnet nuget push "./nupkg/*.nupkg" \
-            --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
-            --api-key ${{ secrets.GITHUB_TOKEN }}
-
-
-      # Optional SonarQube / SonarCloud
-      # - name: SonarQube Scan
-      #   uses: sonarsource/sonarcloud-github-action@master
-      #   with:
-      #     args: >
-      #       -Dsonar.projectKey=CompileCare
-      #       -Dsonar.organization=your_org
-      #       -Dsonar.host.url=https://sonarcloud.io
-      #       -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-
-  # versioning:
-  #   runs-on: ubuntu-latest
-  #   needs: [test, code-quality]
-  #   steps:
-  #     - name: Checkout Code
-  #       uses: actions/checkout@v4
-
-  #     - name: Read current version
-  #       id: get_version
-  #       run: |
-  #         VERSION=$(cat Version.txt)
-  #         echo "Current version: $VERSION"
-  #         echo "version=$VERSION" >> $GITHUB_ENV
-
-  #     - name: Bump version
-  #       id: bump
-  #       run: |
-  #         VERSION=${{ env.version }}
-  #         IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
-
-  #         if [[ "${GITHUB_REF_NAME}" == "develop" ]]; then
-  #           MINOR=$((MINOR+1))
-  #           PATCH=0
-  #         elif [[ "${GITHUB_REF_NAME}" == "main" ]]; then
-  #           PATCH=$((PATCH+1))
-  #         fi
-
-  #         NEW_VERSION="$MAJOR.$MINOR.$PATCH"
-  #         echo "New version: $NEW_VERSION"
-  #         echo $NEW_VERSION > Version.txt
-  #         echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
-
-  #     - name: Commit new version
-  #       run: |
-  #         git config user.name "github-actions[bot]"
-  #         git config user.email "github-actions[bot]@users.noreply.github.com"
-  #         git add Version.txt
-  #         git commit -m "Bump version to ${{ env.new_version }}" || echo "No changes to commit"
-  #         git push origin HEAD:${GITHUB_REF_NAME}
-
-  #     - name: Create Git Tag
-  #       if: github.ref == 'refs/heads/main'
-  #       run: |
-  #         git tag v${{ env.new_version }}
-  #         git push origin v${{ env.new_version }}
+          dotnet nuget push "./nupkg/*.nupkg" \\
+            --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \\
+            --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
