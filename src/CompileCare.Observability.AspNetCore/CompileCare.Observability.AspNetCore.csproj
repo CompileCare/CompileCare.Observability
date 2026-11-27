@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\CompileCare.Observability\CompileCare.Observability.csproj" />
+    <ProjectReference Include="..\HeapCare.Observability\HeapCare.Observability.csproj" />
   </ItemGroup>
 
   <ItemGroup>
