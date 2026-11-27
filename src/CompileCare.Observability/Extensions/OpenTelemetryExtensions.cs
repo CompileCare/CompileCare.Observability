@@ -5,7 +5,7 @@ using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
-namespace CompileCare.Observability.Extensions;
+namespace HeapCare.Observability.Extensions;
 
 public static class OpenTelemetryExtensions
 {
