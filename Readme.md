@@ -1,5 +1,7 @@
 ﻿🚀 Launching the Observability Stack
 
+> **Brand migration status:** HeapCare namespaces, project paths and NuGet package IDs are being migrated in this branch. The GitHub repository remains `CompileCare/CompileCare.Observability` until the organization/repository rename is completed. No domain, DNS, email or deployment origin is assumed.
+
 Start the stack with:
 
 docker-compose up -d

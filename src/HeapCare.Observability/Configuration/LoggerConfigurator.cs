@@ -5,7 +5,7 @@ using Serilog.Enrichers;
 using Serilog.Sinks.Elasticsearch;
 
 
-namespace CompileCare.Observability.Configuration
+namespace HeapCare.Observability.Configuration
 {
     public static class LoggerConfigurator
     {
@@ -29,7 +29,7 @@ namespace CompileCare.Observability.Configuration
                 loggerConfig.WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(elasticUri))
                 {
                     AutoRegisterTemplate = true,
-                    IndexFormat = $"compilecare-logs-{DateTime.UtcNow:yyyy.MM}"
+                    IndexFormat = $"heapcare-logs-{DateTime.UtcNow:yyyy.MM}"
                 });
             }
         }

@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
+    <PackageId>HeapCare.Observability</PackageId>
+    <Authors>HeapCare</Authors>
+    <Company>HeapCare</Company>
+    <Description>Shared logging, tracing, metrics and health-check infrastructure for HeapCare services.</Description>
+    <RepositoryUrl>https://github.com/CompileCare/CompileCare.Observability</RepositoryUrl>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>

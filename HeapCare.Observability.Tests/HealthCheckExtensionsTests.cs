@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
-using CompileCare.Observability.Extensions;
+using HeapCare.Observability.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace CompileCare.Observability.Tests
+namespace HeapCare.Observability.Tests
 {
     public class HealthCheckExtensionsTests
     {

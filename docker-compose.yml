@@ -4,7 +4,7 @@ services:
     container_name: otel-collector
     command: ["--config=/etc/otel-collector-config.yaml"]
     volumes:
-      - "D:/SHATRUGHNA/Code/Compilecare/Code/CompileCare.Observability/otel-config/otel-collector-config.yaml:/etc/otel-collector-config.yaml:ro"
+      - "D:/SHATRUGHNA/Code/Compilecare/Code/HeapCare.Observability/otel-config/otel-collector-config.yaml:/etc/otel-collector-config.yaml:ro"
     ports:
       - "4317:4317"   # OTLP gRPC
       - "4318:4318"   # OTLP HTTP

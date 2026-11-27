@@ -1,4 +1,4 @@
-﻿namespace CompileCare.Observability.Tests
+﻿namespace HeapCare.Observability.Tests
 {
     public class UnitTest1
     {

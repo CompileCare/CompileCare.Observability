@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\CompileCare.Observability\CompileCare.Observability.csproj" />
+    <ProjectReference Include="..\src\HeapCare.Observability\HeapCare.Observability.csproj" />
   </ItemGroup>
 
   <ItemGroup>

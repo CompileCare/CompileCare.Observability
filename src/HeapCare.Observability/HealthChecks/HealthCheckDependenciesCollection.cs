@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace CompileCare.Observability.HealthChecks
+namespace HeapCare.Observability.HealthChecks
 {
     public class HealthCheckDependenciesCollection
     {

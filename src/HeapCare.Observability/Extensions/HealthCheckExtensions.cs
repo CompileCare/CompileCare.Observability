@@ -1,8 +1,8 @@
-﻿using CompileCare.Observability.HealthChecks;
+﻿using HeapCare.Observability.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace CompileCare.Observability.Extensions
+namespace HeapCare.Observability.Extensions
 {
     public static class HealthCheckExtensions
     {
