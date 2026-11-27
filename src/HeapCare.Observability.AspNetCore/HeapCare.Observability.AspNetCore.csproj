@@ -15,6 +15,11 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
+    <PackageId>HeapCare.Observability.AspNetCore</PackageId>
+    <Authors>HeapCare</Authors>
+    <Company>HeapCare</Company>
+    <Description>ASP.NET Core observability extensions and health checks for HeapCare services.</Description>
+    <RepositoryUrl>https://github.com/CompileCare/CompileCare.Observability</RepositoryUrl>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
