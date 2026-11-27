@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/CompileCare.Observability.AspNetCore/CompileCare.Observability.AspNetCore.csproj" />
+    <ProjectReference Include="../../src/HeapCare.Observability.AspNetCore/HeapCare.Observability.AspNetCore.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
