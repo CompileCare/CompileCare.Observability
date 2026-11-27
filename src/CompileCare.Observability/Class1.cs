@@ -1,4 +1,4 @@
-﻿namespace CompileCare.Observability;
+﻿namespace HeapCare.Observability;
 
 public class Class1
 {
