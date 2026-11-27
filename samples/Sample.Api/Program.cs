@@ -1,15 +1,15 @@
-using CompileCare.Observability.AspNetCore.Extensions;
-using CompileCare.Observability.Extensions;
+using HeapCare.Observability.AspNetCore.Extensions;
+using HeapCare.Observability.Extensions;
 using Sample.Api.Extensions;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add Serilog Logging - this is optional as we have extended the HostBuilder to use Serilog
-// builder.AddCompileCareLogging();
+// builder.AddHeapCareLogging();
 
 // Plug in Observability (Serilog + Elastic)
-builder.Host.UseCompileCareObservability();
+builder.Host.UseHeapCareObservability();
 
 // Otel 
 builder.Services.AddObservability(builder.Configuration);
