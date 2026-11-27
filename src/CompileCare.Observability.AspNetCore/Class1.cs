@@ -1,4 +1,4 @@
-﻿namespace CompileCare.Observability.AspNetCore;
+﻿namespace HeapCare.Observability.AspNetCore;
 
 public class Class1
 {
