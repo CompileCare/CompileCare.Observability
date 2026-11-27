@@ -5,11 +5,11 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Sinks.Elasticsearch;
 
-namespace CompileCare.Observability.Extensions
+namespace HeapCare.Observability.Extensions
 {
     public static class LoggingExtensions
     {
-        public static IServiceCollection AddCompileCareLogging(this IServiceCollection services, IConfiguration configuration, IHostEnvironment environment)
+        public static IServiceCollection AddHeapCareLogging(this IServiceCollection services, IConfiguration configuration, IHostEnvironment environment)
         {
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
@@ -32,7 +32,7 @@ namespace CompileCare.Observability.Extensions
                     .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(elasticUri))
                     {
                         AutoRegisterTemplate = true,
-                        IndexFormat = $"compilecare-logs-{DateTime.UtcNow:yyyy.MM}"
+                        IndexFormat = $"heapcare-logs-{DateTime.UtcNow:yyyy.MM}"
                     })
                     .CreateLogger();
             }
