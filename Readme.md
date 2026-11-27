@@ -1,6 +1,6 @@
 ﻿🚀 Launching the Observability Stack
 
-> **Migration status:** HeapCare namespaces, project paths and NuGet package IDs are migrated and published. The GitHub repository slug and package owner namespace remain `CompileCare` until the administrative rename is completed. No domain, DNS, email or deployment origin is assumed.
+> **Migration status:** HeapCare namespaces, project paths, NuGet package IDs, GitHub organization and repository slug are migrated. The package publishing workflow uses the current GitHub organization owner. No domain, DNS, or support-email transition is implied by this repository rename.
 
 Start the stack with:
 
