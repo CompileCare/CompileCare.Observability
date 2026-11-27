@@ -1,12 +1,12 @@
-﻿using CompileCare.Observability.Configuration;
+﻿using HeapCare.Observability.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
-namespace CompileCare.Observability.AspNetCore.Extensions
+namespace HeapCare.Observability.AspNetCore.Extensions
 {
     public static class HostBuilderExtensions
     {
-        public static IHostBuilder UseCompileCareObservability(this IHostBuilder hostBuilder)
+        public static IHostBuilder UseHeapCareObservability(this IHostBuilder hostBuilder)
         {
             return hostBuilder.UseSerilog((context, services, loggerConfig) =>
             {
