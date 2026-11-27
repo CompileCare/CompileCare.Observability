@@ -6,7 +6,7 @@
     <Authors>HeapCare</Authors>
     <Company>HeapCare</Company>
     <Description>Shared logging, tracing, metrics and health-check infrastructure for HeapCare services.</Description>
-    <RepositoryUrl>https://github.com/CompileCare/CompileCare.Observability</RepositoryUrl>
+    <RepositoryUrl>https://github.com/HeapCare/HeapCare.Observability</RepositoryUrl>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
