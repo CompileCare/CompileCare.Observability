@@ -5,7 +5,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.12.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.15.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,8 +20,13 @@
     <Company>HeapCare</Company>
     <Description>ASP.NET Core observability extensions and health checks for HeapCare services.</Description>
     <RepositoryUrl>https://github.com/HeapCare/HeapCare.Observability</RepositoryUrl>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../Readme.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
 </Project>
